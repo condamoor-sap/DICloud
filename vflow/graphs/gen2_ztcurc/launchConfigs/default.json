@@ -1,0 +1,11 @@
+{
+    "snapshotConfig": {
+        "enabled": true,
+        "periodSeconds": 30
+    },
+    "autoRestartConfig": {
+        "maxRestartCount": 1,
+        "restartDelaySeconds": 2,
+        "resetTimeThreshold": "180s"
+    }
+}

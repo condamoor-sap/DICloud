@@ -1,0 +1,658 @@
+{
+    "properties": {},
+    "description": "",
+    "processes": {
+        "tabletobinary1": {
+            "component": "com.sap.table.encode",
+            "metadata": {
+                "label": "Table to Binary",
+                "x": 181,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "generation": 2,
+                "ui": "dynpath",
+                "config": {
+                    "outputFormat": "CSV",
+                    "collectBatches": false
+                },
+                "inports": [
+                    {
+                        "name": "table",
+                        "type": "table",
+                        "isPropagated": true,
+                        "vtype-ID": "$GRAPH.generated.readdatafromsapsystem1_outData"
+                    }
+                ]
+            }
+        },
+        "binaryfileproducer1": {
+            "component": "com.sap.file.write.v2",
+            "metadata": {
+                "label": "Binary File Producer",
+                "x": 365.9999990463257,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "generation": 2,
+                "config": {
+                    "connection": {
+                        "configurationType": "Connection Management",
+                        "connectionID": "AWS_S3_btprefarch"
+                    },
+                    "pathMode": "Static with placeholders",
+                    "path": "/gen2_slt/ztcurc_<date>",
+                    "mode": "Append",
+                    "fileMode": "Partitioned file"
+                }
+            }
+        },
+        "readdatafromsapsystem1": {
+            "component": "com.sap.abap.reader",
+            "metadata": {
+                "label": "Read Data From SAP System",
+                "x": 12,
+                "y": 12,
+                "height": 80,
+                "width": 120,
+                "extensible": true,
+                "generation": 2,
+                "config": {
+                    "connectionID": "SLT_on_Optane",
+                    "operatorID": "com.sap.abap.reader",
+                    "transferMode": "Replication",
+                    "objectName": {
+                        "remoteObjectReference": {
+                            "connection": {
+                                "id": "SLT_on_Optane",
+                                "type": "ABAP"
+                            },
+                            "name": "ZTCURC",
+                            "remoteObjectType": "TABLE",
+                            "qualifiedName": "/SLT/009/ZTCURC",
+                            "nativeQualifiedName": "TABLE.ZTCURC",
+                            "description": "ZTCURC"
+                        },
+                        "schema": {
+                            "genericType": "TABLE",
+                            "tableBasedRepresentation": {
+                                "attributes": [
+                                    {
+                                        "name": "MANDT",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 3,
+                                        "nativeDatatype": "CLNT",
+                                        "descriptions": [
+                                            {
+                                                "value": "Client",
+                                                "locale": "en",
+                                                "type": "SHORT"
+                                            }
+                                        ],
+                                        "properties": [
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapDecimals",
+                                                "value": "000000"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapLength",
+                                                "value": "000003"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapType",
+                                                "value": "CLNT"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "dataElement",
+                                                "value": "MANDT"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "domain",
+                                                "value": "MANDT"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeContentType",
+                                                "value": "string"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeLength",
+                                                "value": "3 "
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "outputLength",
+                                                "value": "000003"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceField"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceTable"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "semanticType",
+                                                "value": "STRING"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "valueTable"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "WAERS",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 5,
+                                        "nativeDatatype": "CUKY",
+                                        "semanticType": "CURRENCY_CODE",
+                                        "descriptions": [
+                                            {
+                                                "value": "Currency Key",
+                                                "locale": "en",
+                                                "type": "SHORT"
+                                            }
+                                        ],
+                                        "properties": [
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapDecimals",
+                                                "value": "000000"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapLength",
+                                                "value": "000005"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapType",
+                                                "value": "CUKY"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "dataElement",
+                                                "value": "WAERS_CURC"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "domain",
+                                                "value": "WAERS"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeContentType",
+                                                "value": "string"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeLength",
+                                                "value": "5 "
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "outputLength",
+                                                "value": "000005"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceField"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceTable"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "semanticType",
+                                                "value": "CURRENCY_CODE"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "valueTable"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "ISOCD",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 3,
+                                        "nativeDatatype": "CHAR",
+                                        "descriptions": [
+                                            {
+                                                "value": "ISO currency code",
+                                                "locale": "en",
+                                                "type": "SHORT"
+                                            }
+                                        ],
+                                        "properties": [
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapDecimals",
+                                                "value": "000000"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapLength",
+                                                "value": "000003"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapType",
+                                                "value": "CHAR"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "dataElement",
+                                                "value": "ISOCD"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "domain",
+                                                "value": "ISOCD"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeContentType",
+                                                "value": "string"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeLength",
+                                                "value": "3 "
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "outputLength",
+                                                "value": "000003"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceField"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceTable"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "semanticType",
+                                                "value": "STRING"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "valueTable"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "ALTWR",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 3,
+                                        "nativeDatatype": "CHAR",
+                                        "descriptions": [
+                                            {
+                                                "value": "Alternative key for currencies",
+                                                "locale": "en",
+                                                "type": "SHORT"
+                                            }
+                                        ],
+                                        "properties": [
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapDecimals",
+                                                "value": "000000"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapLength",
+                                                "value": "000003"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapType",
+                                                "value": "CHAR"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "dataElement",
+                                                "value": "ALTWR"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "domain",
+                                                "value": "CHAR3"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeContentType",
+                                                "value": "string"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeLength",
+                                                "value": "3 "
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "outputLength",
+                                                "value": "000003"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceField"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceTable"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "semanticType",
+                                                "value": "STRING"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "valueTable"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "GDATU",
+                                        "templateType": "date",
+                                        "datatype": "DATE",
+                                        "nativeDatatype": "DATS",
+                                        "descriptions": [
+                                            {
+                                                "value": "Date until which the currency is valid",
+                                                "locale": "en",
+                                                "type": "SHORT"
+                                            }
+                                        ],
+                                        "properties": [
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapDecimals",
+                                                "value": "000000"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapLength",
+                                                "value": "000008"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapType",
+                                                "value": "DATS"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "dataElement",
+                                                "value": "DATUM_CURC"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "domain",
+                                                "value": "DATUM"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeContentType",
+                                                "value": "string"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeLength",
+                                                "value": "8 "
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "outputLength",
+                                                "value": "000010"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceField"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceTable"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "semanticType",
+                                                "value": "DATE"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "valueTable"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "XPRIMARY",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 1,
+                                        "nativeDatatype": "CHAR",
+                                        "descriptions": [
+                                            {
+                                                "value": "Primary SAP Currency Code for ISO Code",
+                                                "locale": "en",
+                                                "type": "SHORT"
+                                            }
+                                        ],
+                                        "properties": [
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapDecimals",
+                                                "value": "000000"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapLength",
+                                                "value": "000001"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapType",
+                                                "value": "CHAR"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "dataElement",
+                                                "value": "XPRIMARY"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "domain",
+                                                "value": "XFELD"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeContentType",
+                                                "value": "string"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "nativeLength",
+                                                "value": "1 "
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "outputLength",
+                                                "value": "000001"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceField"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "referenceTable"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "semanticType",
+                                                "value": "STRING"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "valueTable"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "IUUC_OPERATION",
+                                        "templateType": "string",
+                                        "datatype": "STRING",
+                                        "length": 1,
+                                        "nativeDatatype": "CHAR",
+                                        "filterNotAllowed": true,
+                                        "descriptions": [
+                                            {
+                                                "value": "Opreation",
+                                                "locale": "en",
+                                                "type": "SHORT"
+                                            }
+                                        ],
+                                        "properties": [
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapDecimals",
+                                                "value": "0 "
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapLength",
+                                                "value": "000001"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "abapType",
+                                                "value": "CHAR"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "dataElement",
+                                                "value": "IUUC_OPERATION"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "domain",
+                                                "value": "IUUC_OPERATION"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "filterNotAllowed",
+                                                "value": "true"
+                                            },
+                                            {
+                                                "namespace": "com.sap.abap",
+                                                "name": "semanticType",
+                                                "value": "_change_mode"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "uniqueKeys": [
+                                    {
+                                        "attributeReferences": [
+                                            "MANDT",
+                                            "WAERS"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        "descriptions": [
+                            {
+                                "value": "ZTCURC",
+                                "locale": "en",
+                                "type": "SHORT"
+                            }
+                        ],
+                        "properties": [
+                            {
+                                "namespace": "com.sap.abap",
+                                "name": "isDeltaEnabled",
+                                "value": "X"
+                            },
+                            {
+                                "namespace": "com.sap.abap",
+                                "name": "isExtractionAllowed",
+                                "value": "X"
+                            },
+                            {
+                                "namespace": "com.sap.abap",
+                                "name": "isExtractionEnabled",
+                                "value": "X"
+                            }
+                        ],
+                        "capabilityProperties": [
+                            {
+                                "name": "readOnly",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                },
+                "additionaloutports": [
+                    {
+                        "name": "outData",
+                        "type": "table",
+                        "vtype-ID": "$GRAPH.generated.readdatafromsapsystem1_outData"
+                    }
+                ]
+            }
+        }
+    },
+    "groups": [],
+    "connections": [
+        {
+            "metadata": {
+                "points": "305,43 332.99999952316284,43 332.99999952316284,52 360.9999990463257,52"
+            },
+            "src": {
+                "port": "binary",
+                "process": "tabletobinary1"
+            },
+            "tgt": {
+                "port": "file",
+                "process": "binaryfileproducer1"
+            }
+        },
+        {
+            "metadata": {
+                "points": "136,52 176,52"
+            },
+            "src": {
+                "port": "outData",
+                "process": "readdatafromsapsystem1"
+            },
+            "tgt": {
+                "port": "table",
+                "process": "tabletobinary1"
+            }
+        }
+    ],
+    "inports": {},
+    "outports": {},
+    "metadata": {
+        "generation": 2
+    }
+}
